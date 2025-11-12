@@ -1,0 +1,73 @@
+services:
+    nginx:
+      container_name: nginx
+      build: ./requirements/nginx/.
+      ports: 
+      - "443:443"
+      depends_on:
+      - wordpress
+      restart: always
+      networks:
+          - network_inception
+      environment:
+          - DOMAINNAME=${DOMAINNAME}
+      secrets:
+        - nginx.crt
+        - nginx.key
+      volumes:
+        - wordpress_data:/var/www/html
+    mariadb:
+        build: ./requirements/mariadb
+        container_name: mariadb
+        volumes:
+          - database:/var/lib/mysql
+        restart: always
+        environment:
+          - ROOTUSER=${ROOTUSER}
+        secrets:
+          - rootpassword
+        networks:
+            - network_inception
+    wordpress:
+      container_name: wordpress
+      build: ./requirements/wordpress/.
+      depends_on:
+        - mariadb
+      networks:
+        - network_inception
+      volumes:
+        - wordpress_data:/var/www/html
+      environment:
+        - ROOTUSER=${ROOTUSER}
+        - ADMINUSER=${ADMINUSER}
+        - AUTHORUSER=${AUTHORUSER}
+      secrets:
+        - rootpassword
+        - adminpassword
+        - authorpassword
+
+
+      
+networks:
+  network_inception:
+    driver: bridge
+
+secrets:
+  rootpassword:
+      file: ../secrets/rootpassword.txt
+  adminpassword:
+      file: ../secrets/adminpassword.txt
+  authorpassword:
+      file: ../secrets/authorpassword.txt
+  nginx.crt:
+      file: ../secrets/nginx.crt
+  nginx.key:
+      file: ../secrets/nginx.key
+
+volumes:
+  wordpress_data:
+    driver: local
+  database:
+    driver: local
+
+

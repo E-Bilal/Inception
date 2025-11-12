@@ -73,12 +73,12 @@ DOMAINNAME= your domain name (example: test.com)
 
 These values can be whatever you want
 ```
-Create a secrets folder in the root directory. cd to your secrets folder and create 5 files with these names:
+Create a secrets folder in the root directory. cd to your secrets folder and create 3 files with these names:
 * rootpassword.txt
 * adminpassword.txt
 * authorpassword.txt
 
-Open these txt files and insert a these values into the files:
+Open these txt files and insert these values into the files:
 ```bash
 rootpassword.txt  -> place your root password here
 adminpassword.txt  -> place your wordpress admin password here
@@ -97,15 +97,17 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout nginx.key -out nginx
 If you want to access your wordpress in your browser with your domain name, 
 then you have to add it to your etc/hosts file
 ```bash
-x has to be exactly the same as your DOMAINNAME you used in your env file.
+NOTE: X  has to be exactly the same as your DOMAINNAME you used in your env file.
 
 To add the domain name to your hosts
-sudo sed -i "/x/d" /etc/hosts && echo "127.0.0.1 x" | sudo tee -a /etc/hosts
+sudo sed -i "/X/d" /etc/hosts && echo "127.0.0.1 X" | sudo tee -a /etc/hosts
 
 To remove the domain name from your hosts
-sudo sed -i "/x/d" /etc/hosts
+sudo sed -i "/X/d" /etc/hosts
 
-IMPORTANT: make sure to delete the domain name from your hosts after you are finished. Or else you won't be able to access the domain name you used on the internet is it's now linked to the 127.0.0.1 IP-address
+IMPORTANT: make sure to delete the domain name from your hosts after you are finished.
+Or else you won't be able to access that domain name you used on the internet is it's now linked to the 127.0.0.1 IP-address.
+EXAMPLE: if the domain name you used was gitlab.com , you wont be able to access gitlab.com anymore since it's linked to the 127.0.0.1 IP-address unless you remove it.
 ```
 
 ## Start

@@ -105,9 +105,10 @@ sudo sed -i "/X/d" /etc/hosts && echo "127.0.0.1 X" | sudo tee -a /etc/hosts
 To remove the domain name from your hosts
 sudo sed -i "/X/d" /etc/hosts
 
-IMPORTANT: make sure to delete the domain name from your hosts after you are finished.
-Or else you won't be able to access that domain name you used on the internet is it's now linked to the 127.0.0.1 IP-address.
-EXAMPLE: if the domain name you used was gitlab.com , you wont be able to access gitlab.com anymore since it's linked to the 127.0.0.1 IP-address unless you remove it.
+IMPORTANT: Make sure to delete the domain name from your hosts after you are finished.or you won't be able to access that domain name  anymore.
+
+EXAMPLE: if the domain name you used was gitlab.com.You wont be able to access gitlab.com anymore,
+since it's linked to the 127.0.0.1 IP-address unless you remove it.
 ```
 
 ## Start

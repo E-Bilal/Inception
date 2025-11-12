@@ -119,6 +119,6 @@ make
 or you can also use this command:
 make all
 
-if you are finished use this command: 
+If you want to shutdown the dockers use this command: 
 make down
 ```
